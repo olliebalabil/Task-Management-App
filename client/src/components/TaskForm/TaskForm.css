@@ -1,10 +1,29 @@
 .taskform {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: whitesmoke;
-  padding: 3%;
+  padding: 2%;
   margin: 5%;
   text-align: left;
   border-radius: 20px;
 
+}
+
+.taskform>#textInput {
+  width: 95%;
+  font-size: 20px;
+}
+
+.taskform>textarea {
+  height: 150px;
+  width: 95%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 15px
+}
+
+.taskform>#submit {
+  width: fit-content;
+  font-size: 20px;
 }

@@ -4,6 +4,7 @@ import "./TaskForm.css"
 export default function TaskForm() {
   const [name, setName] = useState("")
   const [notes, setNotes] = useState("")
+  const [message, setMessage] = useState("")
 
   const handleInput = (e) => {
     setName(e.target.value)
@@ -16,20 +17,33 @@ export default function TaskForm() {
   const handleSubmit = (e) => {
     e.preventDefault()
     const addTask = async () => {
-      const options = {
-        method: "POST",
-        body: JSON.stringify({
-          task_name: name,
-          task_notes: notes
-        }),
-        headers: {
-          'Content-type': 'application/json'
+      try {
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            task_name: name,
+            task_notes: notes
+          }),
+          headers: {
+            'Content-type': 'application/json'
+          }
         }
+        const response = await fetch('http://localhost:3000/tasks', options)
+        const data = await response.json()
+        setMessage("Task has been added!")
+        setTimeout(() => {
+          setMessage("")
+        }, 5000)
       }
-      const response = await fetch('http://localhost:3000/tasks', options)
-      const data = await response.json()
+      catch (err) {
+        console.error(err.message)
+      }
     }
-    addTask()
+    if (name!="") {
+      addTask()
+    } else {
+      setMessage("Make sure you've given the task a name before submitting!")
+    }
     setName("")
     setNotes("")
   }
@@ -37,10 +51,11 @@ export default function TaskForm() {
   return (
     <>
       <form className="taskform" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Enter task here..." onChange={handleInput} value={name} />
+        <input id="textInput" type="text" placeholder="Enter task here..." onChange={handleInput} value={name} />
         <textarea placeholder="Add notes here..." onChange={handleTextarea} value={notes} />
-        <input type="submit" value="Add" />
+        <input id="submit" type="submit" value="Add" />
       </form>
+      <p>{message}</p>
     </>
   )
 }
