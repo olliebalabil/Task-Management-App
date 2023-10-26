@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
-const snackRouter = require('./routers/snack');
+const taskRouter = require('./routers/tasks');
 
 const api = express();
 
@@ -10,11 +10,11 @@ api.use(express.json());
 
 api.get("/", (req, res) => {
     res.json({
-        title: "Snack Rankings",
-        description: "Find and rate the best snacks ever!"
+        title: "Tasks",
+        description: "API for task management app"
     })
 })
 
-api.use("/snacks", snackRouter);
+api.use("/tasks", taskRouter);
 
 module.exports = api;
