@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 
 export default function RegisterPage() {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
   const [textInput, setTextInput] = useState("")
   const [passwordInput, setPasswordInput] = useState("")
 
   const handleTextInput = (e) => {
     setTextInput(e.target.value)
+
   }
   const handlePasswordInput = (e) => {
     setPasswordInput(e.target.value)
@@ -16,8 +15,6 @@ export default function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setUsername(textInput)
-    setPassword(passwordInput)
     const register = async () => {
       const options = {
         method: "POST",
@@ -26,16 +23,16 @@ export default function RegisterPage() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: username,
-          password: password
+          username: textInput,
+          password: passwordInput
         })
       }
       const response = await fetch("http://localhost:3000/users/register", options)
       const data = await response.json()
     }
     register()
-    setTextInput("")
-    setPasswordInput("")
+setTextInput("")
+setPasswordInput("")
   }
   return (
     <>
