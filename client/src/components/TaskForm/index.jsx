@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react"
 import "./TaskForm.css"
+import { useAuth } from "../../contexts"
 
 export default function TaskForm() {
   const [name, setName] = useState("")
   const [notes, setNotes] = useState("")
   const [message, setMessage] = useState("")
+  const { user } = useAuth()
+
 
   const handleInput = (e) => {
     setName(e.target.value)
@@ -18,12 +21,22 @@ export default function TaskForm() {
     e.preventDefault()
     const addTask = async () => {
       try {
-        const options = {
-          method: "POST",
-          body: JSON.stringify({
+        let body;
+        if (user) {
+          body = JSON.stringify({
+            task_name: name,
+            task_notes: notes,
+            username: user
+          })
+        } else {
+          body = JSON.stringify({
             task_name: name,
             task_notes: notes
-          }),
+          })
+        }
+        const options = {
+          method: "POST",
+          body: body,
           headers: {
             'Content-type': 'application/json'
           }
@@ -39,7 +52,7 @@ export default function TaskForm() {
         console.error(err.message)
       }
     }
-    if (name!="") {
+    if (name != "") {
       addTask()
     } else {
       setMessage("Make sure you've given the task a name before submitting!")

@@ -5,7 +5,8 @@ DROP TABLE IF EXISTS user_account;
 CREATE TABLE task (
     task_id INT GENERATED ALWAYS AS IDENTITY,
     task_name VARCHAR(30) UNIQUE NOT NULL,
-    task_notes VARCHAR(500)
+    task_notes VARCHAR(500),
+    username VARCHAR(30)
 );
 CREATE TABLE user_account (
     user_id INT GENERATED ALWAYS AS IDENTITY,

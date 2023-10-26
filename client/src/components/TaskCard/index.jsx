@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import "./TaskCard.css"
 
-export default function TaskCard({id, name,notes, tasks, setTasks}) {
+export default function TaskCard({id, name,notes, username, tasks, setTasks}) {
 
   const handleRemove = (e) => {
     const removeTask = async () => {
@@ -13,12 +13,13 @@ export default function TaskCard({id, name,notes, tasks, setTasks}) {
     }
     removeTask()
   }
-
+  console.log(username)
   return(
    <div className="taskcard">
     <div>
      <h2>{name}</h2>
      <p>{notes}</p>
+     {username && <p>Author: {username}</p>}
     </div>
     <div className="cardBtns">
     <input type="checkbox"/>

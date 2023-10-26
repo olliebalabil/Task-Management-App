@@ -2,10 +2,11 @@ const db = require("../database/connect");
 
 class Task {
 
-    constructor ({ task_id, task_name, task_notes }) {
+    constructor ({ task_id, task_name, task_notes , username}) {
         this.id = task_id;
         this.name = task_name;
         this.notes = task_notes;
+        this.username = username;
     }
 
     static async getAll() {
@@ -22,8 +23,8 @@ class Task {
     }
 
     static async create(data) {
-        const{task_name, task_notes} = data;   
-        const response = await db.query('INSERT INTO task (task_name, task_notes) VALUES ($1, $2) RETURNING *;', [task_name, task_notes]);
+        const{task_name, task_notes, username} = data;   
+        const response = await db.query('INSERT INTO task (task_name, task_notes, username) VALUES ($1, $2, $3) RETURNING *;', [task_name, task_notes, username]);
 
         return response.rows.map(w => new Task(w))
     }

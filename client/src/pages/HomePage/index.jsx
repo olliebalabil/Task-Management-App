@@ -24,8 +24,8 @@ export default function HomePage() {
       <br />
       {tasks.length==0 && <button onClick={()=> {
         navigate("/add")
-      }}>Add Link</button>}
-      {tasks.map((el) => <TaskCard id={el.id} name={el.name} notes={el.notes} completed={completed} setCompleted={setCompleted} tasks={tasks} setTasks={setTasks} key={el.id}/>)}
+      }}>Add Task</button>}
+      {tasks.map((el) => <TaskCard id={el.id} name={el.name} notes={el.notes} username={el.username} completed={completed} setCompleted={setCompleted} tasks={tasks} setTasks={setTasks} key={el.id}/>)}
 
     </>
   )
