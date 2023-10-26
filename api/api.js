@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 
 const taskRouter = require('./routers/tasks');
+const userRouter = require('./routers/user');
+
 
 const api = express();
 
@@ -16,5 +18,6 @@ api.get("/", (req, res) => {
 })
 
 api.use("/tasks", taskRouter);
+api.use("/users",userRouter)
 
 module.exports = api;

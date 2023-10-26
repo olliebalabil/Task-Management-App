@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { TaskCard } from "../../components"
 
 export default function HomePage() {
+  const navigate = useNavigate()
   const [tasks, setTasks] = useState([])
   const [completed, setCompleted] = useState(false)
   const fetchAPI = async () => {
@@ -19,7 +21,11 @@ export default function HomePage() {
     <>
       <h1>Tasks</h1>
       <em>View, edit and add tasks!</em>
-      {tasks.map((el) => <TaskCard id={el.id} name={el.name} notes={el.notes} completed={completed} setCompleted={setCompleted} tasks={tasks} setTasks={setTasks} key={el.id}/>)}
+      <br />
+      {tasks.length==0 && <button onClick={()=> {
+        navigate("/add")
+      }}>Add Task</button>}
+      {tasks.map((el) => <TaskCard id={el.id} name={el.name} notes={el.notes} username={el.username} completed={completed} setCompleted={setCompleted} tasks={tasks} setTasks={setTasks} key={el.id}/>)}
 
     </>
   )
