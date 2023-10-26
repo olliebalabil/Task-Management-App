@@ -1,9 +1,11 @@
 import React from "react"
+import { TaskForm } from "../../components"
 
-export default function AddPage(){
-  return(
+export default function AddPage() {
+  return (
     <>
-    Add Page
+    <h1>Add a task</h1>
+      <TaskForm />
     </>
   )
 }

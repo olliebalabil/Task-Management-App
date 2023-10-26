@@ -1,0 +1,10 @@
+.taskcard {
+  display: flex;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  padding: 3%;
+  margin: 5%;
+  text-align: left;
+  border-radius: 20px;
+
+}
