@@ -1,13 +1,24 @@
 DROP TABLE IF EXISTS task;
+DROP TABLE IF EXISTS token;
+DROP TABLE IF EXISTS user_account;
 
 CREATE TABLE task (
     task_id INT GENERATED ALWAYS AS IDENTITY,
     task_name VARCHAR(30) UNIQUE NOT NULL,
     task_notes VARCHAR(500)
-    
+);
+CREATE TABLE user_account (
+    user_id INT GENERATED ALWAYS AS IDENTITY,
+    username VARCHAR(30) UNIQUE NOT NULL,
+    password CHAR(60) NOT NULL,
+    PRIMARY KEY (user_id)
 );
 
-INSERT INTO task
-    (task_name, task_notes)
-VALUES
-    ('Example Task', 'This is the note section for the example');
+CREATE TABLE token (
+    token_id INT GENERATED ALWAYS AS IDENTITY,
+    user_id INT NOT NULL,
+    token CHAR(36) UNIQUE NOT NULL,
+    PRIMARY KEY (token_id),
+    FOREIGN KEY (user_id) REFERENCES user_account("user_id")
+);
+
